@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+	"strings"
+	"time"
+)
 
 type User struct {
 	Id          uint64    `json:"id"`
@@ -33,6 +36,20 @@ type Quote struct {
 	Source string   `json:"source"`
 	Quote  string   `json:"quote"`
 	Length QuoteLen `json:"length"`
+}
+
+func CalcQuoteLen(quote_text string) QuoteLen {
+	num_of_words := len(strings.Split(quote_text, " "))
+	switch {
+	case num_of_words < 21:
+		return QUOTE_SHORT
+	case num_of_words < 46:
+		return QUOTE_MEDIUM
+	case num_of_words < 101:
+		return QUOTE_LARGE
+	default:
+		return QUOTE_EXTRA_LARGE
+	}
 }
 
 type QuoteRequest struct {
