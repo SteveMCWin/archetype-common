@@ -8,6 +8,8 @@ type User struct {
 	Password    string    `json:"password"`
 	Email       string    `json:"email"`
 	DateCreated time.Time `json:"dateCreated"`
+	Priviledged bool      `json:"priviledged"`
+	// Add is admin!! Or something like that
 
 	// stats
 	TestsStarted   uint    `json:"testsStarted"`
@@ -16,18 +18,30 @@ type User struct {
 	AllTimeAvgACC  float32 `json:"allTimeAvgACC"`
 }
 
-type QuoteLen string
+type QuoteLen int
 
 const (
-	QUOTE_SHORT       QuoteLen = "s"
-	QUOTE_MEDIUM      QuoteLen = "m"
-	QUOTE_LARGE       QuoteLen = "l"
-	QUOTE_EXTRA_LARGE QuoteLen = "xl"
+	QUOTE_SHORT QuoteLen = iota
+	QUOTE_MEDIUM
+	QUOTE_LARGE
+	QUOTE_EXTRA_LARGE
+	QUOTE_ANY_SIZE
 )
 
 type Quote struct {
-	Id     int      `json:"id"`
+	Id     uint64   `json:"id"`
 	Source string   `json:"source"`
 	Quote  string   `json:"quote"`
 	Length QuoteLen `json:"length"`
+}
+
+type QuoteRequest struct {
+	Length QuoteLen `json:"length"`
+}
+
+type WordsRequest struct {
+	Length      uint `json:"length"`
+	TimeLimited bool `json:"time_limited"`
+	Punctuation bool `json:"punctuation"`
+	Numbers     bool `json:"numbers"`
 }
