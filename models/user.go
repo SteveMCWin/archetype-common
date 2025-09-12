@@ -12,7 +12,6 @@ type User struct {
 	Email       string    `json:"email"`
 	DateCreated time.Time `json:"dateCreated"`
 	Priviledged bool      `json:"priviledged"`
-	// Add is admin!! Or something like that
 
 	// stats
 	TestsStarted   uint    `json:"testsStarted"`
@@ -32,10 +31,11 @@ const (
 )
 
 type Quote struct {
-	Id     uint64   `json:"id"`
-	Source string   `json:"source"`
-	Quote  string   `json:"quote"`
-	Length QuoteLen `json:"length"`
+	Id         uint64   `json:"id"`
+	Source     string   `json:"source"`
+	Quote      string   `json:"quote"`
+	Length     QuoteLen `json:"length"`
+	NumOfStars int      `json:"num_of_stars"`
 }
 
 func CalcQuoteLen(quote_text string) QuoteLen {
